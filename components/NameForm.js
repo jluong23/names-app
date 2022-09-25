@@ -4,16 +4,22 @@ import {StyleSheet, Text, View, TextInput, Button } from 'react-native';
 export default function NameForm({addName}) {
 
     const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
 
     return (
         <View style={styles.formWrapper}>
             <TextInput
                 style={styles.textInput}
                 onChangeText={(text) => {setName(text)}}
-                placeholder="New name..."
+                placeholder="New name"
+            />
+            <TextInput
+                style={styles.textInput}
+                onChangeText={(text) => {setDescription(text)}}
+                placeholder="Description"
             />
             <View style={styles.submitButton}>
-                <Button onPress={() => {addName(name)}} title="Submit"/>
+                <Button onPress={() => {addName(name, description)}} title="Submit"/>
 
             </View>
         </View>
@@ -30,7 +36,7 @@ const styles = StyleSheet.create({
     textInput: {
       borderWidth: 1,
       padding: 5,
-      marginVertical: 20,
+      marginVertical: 10,
       width: 300
     },
 

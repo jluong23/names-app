@@ -6,9 +6,9 @@ import NameForm from './components/NameForm';
 import NameItem from './components/NameItem';
 export default function App() {
   const [names, setNames] = useState([
-    {id: 1, name: 'James'},
-    {id: 2, name: 'Richard'},
-    {id: 3, name: 'Bob'},
+    {id: 1, name: 'Elsa', description: 'From Frozen'},
+    {id: 2, name: 'James R', description: 'My old housemate!'},
+    {id: 3, name: 'Bob', description: 'Street Fighter'},
   ]);
 
   const removeName = (id) => {
@@ -17,14 +17,17 @@ export default function App() {
     })
   }    
 
-  const addName = (name) => {
-    if(name && name.length > 0){
+  const addName = (name, description) => {
+    const nameValid = name && name.length > 0;
+    const descriptionValid = description && description.length > 0;
+    if(nameValid && descriptionValid){
       setNames((prevNames) => {
-        const newName = {name, id:prevNames.length+1} 
+        const newName = {name, description, id:prevNames.length+1} 
         return [newName, ...prevNames]
       })
     }else{
-      Alert.alert('Error', 'Please enter a name before submitting.', [
+      const errorMsg = nameValid ? 'Please enter a description' : 'Please enter a name';
+      Alert.alert('Error', errorMsg, [
         {text: 'Ok'}
       ])
     }
